@@ -1,0 +1,5 @@
+{
+    "git.ignoreLimitWarning": true,
+    "editor.formatOnSave": true,
+    "clang-format.executable": "/home/user/nullmax_pilot/tools/clang-format"
+}
