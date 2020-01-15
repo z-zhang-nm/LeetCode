@@ -28,22 +28,44 @@
  * 
  */
 
-// @lc code=start
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+#include <iostream>
+using namespace std;
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+//Definition for singly-linked list.
 
-#为了避免两个输入链表同时为空，建立一个 dummy 结点
+// @lc code=start
 class Solution
 {
 public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     {
+        //为了避免两个输入链表同时为空，建立一个 dummy 结点
+        ListNode *dummy = new ListNode(-1), *cur = dummy;
+        int carry = 0;
+        while (l1 || l2)
+        {
+            //两个节点值相加时先判断，若为空则取0，否则取结点值
+            int val1 = l1 ? l1->val : 0;
+            int val2 = l2 ? l2->val : 0;
+            int sum = val1 + val2 + carry;
+            carry = sum / 10;
+            ListNode *temp = new ListNode(sum % 10);
+            cur->next = temp;
+            cur = cur->next;
+            l1 = l1 ? l1->next : l1;
+            l2 = l2 ? l2->next : l2;
+        }
+        if (carry)
+        {
+            ListNode *temp = new ListNode(1);
+            cur->next = temp;
+        }
+        return dummy->next;
     }
 };
 // @lc code=end
